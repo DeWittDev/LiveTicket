@@ -1,0 +1,19 @@
+body {
+	margin: 5% 30%;
+	background-color: #002b2f;
+	color: #00ffddaa;
+}
+
+.view {
+	display: flex;
+}
+
+td, th {
+	width: 50%;
+	border-bottom: 1px solid #00ffddaa;
+}
+
+.dash {
+	display: flex;
+	justify-content: space-between;
+}

@@ -32,7 +32,7 @@ public class Bug {
 	
 	//Description
 	@NotEmpty
-	@Size(min = 5, message = "Explain exactly what the problem is.")
+	@Size(min = 6, message = "You need more for a thorough description")
 	private String description;
 	
 	@Column(updatable=false)

@@ -7,9 +7,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -37,10 +34,10 @@ public class User {
     private String email;
     
     //Position
-    //@NotEmpty(message = "Select option")
-    //private String position
-	    
-    //Password
+    @NotEmpty(message = "Select option")
+    private String position;
+	
+	//Password
     @NotEmpty(message="Password is required!")
     @Size(min=8, max=128, message="Password must be between 8 and 128 characters")
     private String password;
@@ -55,9 +52,10 @@ public class User {
     @OneToMany(mappedBy="users",  fetch=FetchType.LAZY)
 	private List<Bug> bug;
     
-    @ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "messages", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "messageId"))
-    private List<Messages> Messages;
+    //Messages
+    //
+    //
+    //
     
 	public Long getId() {
 		return id;
@@ -98,21 +96,22 @@ public class User {
 	public void setConfirm(String confirm) {
 		this.confirm = confirm;
 	}
+    
+    public String getPosition() {
+		return position;
+	}
 
-	public List<Bug> getIdea() {
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public List<Bug> getBug() {
 		return bug;
 	}
 
-	public void setIdea(List<Bug> bug) {
+	public void setBug(List<Bug> bug) {
 		this.bug = bug;
 	}
 
-	public List<Messages> getMessages() {
-		return Messages;
-	}
-
-	public void setMessages(List<Messages> messages) {
-		Messages = messages;
-	}
 	    
 }
