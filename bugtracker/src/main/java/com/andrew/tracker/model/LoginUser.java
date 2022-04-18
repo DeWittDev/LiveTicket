@@ -1,31 +1,24 @@
 package com.andrew.tracker.model;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-
 public class LoginUser {
-	 @NotEmpty(message="Email is required!")
-	    @Email(message="Please enter a valid email!")
-	    private String email;
-	    
-	    @NotEmpty(message="Password is required!")
-	    @Size(min=8, max=128, message="Password must be between 8 and 128 characters")
-	    private String password;
+	
+	    private String userEmail;
 
-		public String getEmail() {
-			return email;
+	    private String userPassword;
+
+		public String getUserEmail() {
+			return userEmail;
 		}
 
-		public void setEmail(String email) {
-			this.email = email;
+		public void setUserEmail(String userEmail) {
+			this.userEmail = userEmail;
 		}
 
-		public String getPassword() {
-			return password;
+		public String getUserPassword() {
+			return userPassword;
 		}
 
-		public void setPassword(String password) {
-			this.password = password;
+		public void setUserPassword(String userPassword) {
+			this.userPassword = userPassword;
 		}
 }

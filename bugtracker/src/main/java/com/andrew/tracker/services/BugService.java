@@ -33,6 +33,12 @@ public class BugService {
 		return null;
 	}
 	
+	//Edit
+	public Bug editBug(Bug edit) {
+		bugRepository.save(edit);
+		return null;
+	}
+	
 	//Delete
 	public Bug delete(Long id) {
 		bugRepository.deleteById(id);

@@ -12,6 +12,7 @@
 <title>Login and Register</title>
 </head>
 <body>
+<div>
 	<div class="dash">
 		<h1>Welcome <c:out value="${currentUser.name}"/></h1>
 		<div>
@@ -19,24 +20,34 @@
 			<a href="/bug/report">Report Bug</a>
 		</div>
 	</div>
-	 	
-	 	<div>
-			<h3>Pile of Ideas</h3>
-			<table>
+	 
+	 <div>
+		 <div class="view">
+			<h3>Bug Bin</h3>
+			<table class="table table-dark table-hover">
 				<tr>
+					<th>Tracking #</th>
 					<th>Title</th>
-					<th>Added By</th>
+					<th>Reported By</th>
 					<th>Actions</th>
 				</tr>
 				<c:forEach items="${bug}" var="bug">
 				<tr>
-					<td><a href="/bug/${bug.id}"><c:out value="${bug.title}"/></a></td>
+					<td><c:out value="${bug.id}"/></td>
+					<td><c:out value="${bug.title}"/></td>
 					<td><c:out value="${bug.users.name}"/></td>
-					<td><a href="">edit</a><br><a href="/delete/${bug.id}">delete</a></td>
+					<td>
+						<c:if test="${currentUser.id == bug.users.id || currentUser.position == 'Admin'}">
+							<a href="/edit/bug/${bug.id}">Edit</a>
+						</c:if>
+						<a href="/bug/${bug.id}">View</a>
+					</td>
 				</tr>
 				</c:forEach>		
 			</table>
 			<br>
 		</div>
+	</div>
+</div>
 </body>
 </html>

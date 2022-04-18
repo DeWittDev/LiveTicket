@@ -11,11 +11,12 @@
 	<link rel="stylesheet" type="text/css" href="/css/styles.css">
 <title>Login and Register</title>
 </head>
-<body>
+<body class=".bg-secondary.bg-gradient">
 
 	<%-- Registration --%>
 	<div class="form">
 		<h2>Register</h2>
+		<br>
 	    <form:form action="/register" method="post" modelAttribute="newUser">
 	        <div class="form-group">
 	            <label>Name:</label>
@@ -50,14 +51,16 @@
 		<h2>Login</h2>
 	    <form:form action="/login" method="post" modelAttribute="newLogin">
 	        <div class="form-group">
+	        
+	            <form:errors class="text-warning" path="userPassword"/>
+	            <form:errors path="userEmail"/>
+	            <br>
 	            <label>Email:</label>
-	            <form:input path="email"/>
-	            <form:errors path="email"/>
+	            <form:input path="userEmail"/>
 	        </div>
 	        <div class="form-group">
 	            <label>Password:</label>
-	            <form:password path="password"/>
-	            <form:errors path="password"/>
+	            <form:password path="userPassword"/>
 	        </div>
 	        <input type="submit" value="Login"/>
 	    </form:form>

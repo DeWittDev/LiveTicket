@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import com.andrew.tracker.model.Bug;
 import com.andrew.tracker.model.LoginUser;
@@ -43,7 +44,7 @@ public class Render {
     public String register(@Valid @ModelAttribute("newUser") User user, BindingResult result, @ModelAttribute("newLogin") LoginUser newLogin) {
     	userService.validation(user, result);
     	if(result.hasErrors()) {
-    		return "redirect:/";
+    		return "index.jsp";
     	}
 		userService.register(user);
 		session.setAttribute("currentUser", user);
@@ -51,12 +52,12 @@ public class Render {
     }
     
     @PostMapping("/login")
-    public String login(@Valid @ModelAttribute("newLogin") LoginUser newLogin, BindingResult result, @ModelAttribute("newUser") User user) {
+    public String login(@Valid @ModelAttribute("newLogin") LoginUser newLogin, BindingResult result, @ModelAttribute("newUser") User user, Model model) {
     	userService.authenticate(newLogin, result);
     	if(result.hasErrors()) {
     		return "index.jsp";
     	}
-    	User currentUser = userService.findByEmail(newLogin.getEmail());
+    	User currentUser = userService.findByEmail(newLogin.getUserEmail());
     	
     	session.setAttribute("currentUser", currentUser);
     	return "redirect:/dash";
@@ -68,7 +69,7 @@ public class Render {
     	return "redirect:/";
     }
     
-    //Bug 
+    //Dashboard 
     @GetMapping("/dash")
     public String dashboard(Model model){
     	if(session.getAttribute("currentUser") == null) {
@@ -78,6 +79,7 @@ public class Render {
     	return "dash.jsp";
     }
     
+    //Create Report
     @GetMapping("/bug/report")
     public String reportForm(@ModelAttribute("bug") Bug bug) {
     	if(session.getAttribute("currentUser") == null) {
@@ -95,14 +97,38 @@ public class Render {
     	return "redirect:/";
     }
     
-    @GetMapping("/info") 
-    public String info() {
+    //View Report
+    @GetMapping("/bug/{id}") 
+    public String info(@PathVariable("id") Long id, Model model) {
     	if(session.getAttribute("currentUser") == null) {
     		return "redirect:/";
     	}
+    	model.addAttribute("bug", bugService.findById(id));
     	return "info.jsp";
     }
     
+    
+    //Edit Report
+    @GetMapping("/edit/bug/{id}")
+    public String editReport(@PathVariable("id") Long id, Model model) {
+    	if(session.getAttribute("currentUser") == null) {
+    		return "redirect:/";
+    	}
+    	model.addAttribute("bug", bugService.findById(id));
+    	return "editBug.jsp";
+    }
+    
+    @PutMapping("/edit/{id}")
+    public String editBug(@Valid @PathVariable("id") Long id, @ModelAttribute("bug") Bug bug) {
+    	if(session.getAttribute("currentUser") == null) {
+    		return "redirect:/";
+    	}
+    	bugService.editBug(bug);
+    	return "redirect:/";
+    }
+    
+    
+    //Delete Report
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
     	if(session.getAttribute("currentUser") == null) {

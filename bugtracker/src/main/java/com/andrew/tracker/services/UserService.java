@@ -3,6 +3,7 @@ package com.andrew.tracker.services;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 
 import com.andrew.tracker.model.LoginUser;
@@ -45,22 +46,23 @@ public class UserService {
 	}
 	
 	//Authentication
-	public User authenticate(LoginUser newLogin, Errors errors) {
+	public boolean authenticate(LoginUser newLogin, BindingResult result) {
 		
-		User user = userRepository.findByEmail(newLogin.getEmail());
+		User user = userRepository.findByEmail(newLogin.getUserEmail());
 		
-		if(user==null) {
-			errors.rejectValue("email", "missing", "Email not Found");
-			return null;
+		if(user == null) {
+			result.rejectValue("userEmail", "missing", "Email or Password is invalid");
+			return false;
 		} 
-		else {
-			if(!BCrypt.checkpw(newLogin.getPassword(), user.getPassword())) {
-				errors.rejectValue("password", "False", "Invalid Password");
-				return null;
-		}
-			
-		return user;
 		
+		
+		else {
+			if(!BCrypt.checkpw(newLogin.getUserPassword(), user.getPassword())) {
+				result.rejectValue("userPassword", "False", "Email or Password is invalid");
+				return false;
+			}
 		}
+		return true;
+		
 	}
 }

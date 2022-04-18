@@ -8,8 +8,8 @@ pageEncoding="UTF-8"%>
 <head>
 	<meta charset="UTF-8">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	<title>Show</title>
+	<link rel="stylesheet" type="text/css" href="/css/styles.css">
+	<title>Report Info</title>
 </head>
 <body>
 	<div class="dash">
