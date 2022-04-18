@@ -57,6 +57,10 @@ td, th {
 	background-color: #222222;
 }
 
+#heading {
+	justify-content: center;
+}
+
 label {
 	text-decoration-line: underline;
 }
