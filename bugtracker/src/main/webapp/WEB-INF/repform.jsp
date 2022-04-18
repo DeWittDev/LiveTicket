@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="/css/styles.css">
+<link rel="stylesheet" type="text/css" href="/css/styles.css">
 <title>Report</title>
 </head>
 <body>
@@ -19,9 +19,8 @@
 			<a href="/dash">Home</a>
 		</div>
 	</div>
-	<h2>Create Bug Report</h2>
 	<div class="view">
-		
+	<h2>Create Bug Report</h2>
 		<div>
 			<form:form action="/bug/submit" method="POST" modelAttribute="bug">
 				<div>
@@ -29,6 +28,7 @@
 					<form:input path="title" />
 					<form:errors path="title"/>
 				</div>
+				<br>
 				<div>
 					<form:label path="description">Description:</form:label><br>
 					<form:textarea path="description" rows="3"/>
@@ -37,6 +37,7 @@
 				<div>
 					<form:input type="hidden" path="users" value="${currentUser.id}" />
 				</div>
+				<br>
 				<button>Submit</button>
 			</form:form>
 		</div>

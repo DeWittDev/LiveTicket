@@ -23,7 +23,7 @@
 	 
 	 <div>
 		 <div class="view">
-			<h3>Bug Bin</h3>
+			<h2>Bug Bin</h2>
 			<table class="table table-dark table-hover">
 				<tr>
 					<th>Tracking #</th>
